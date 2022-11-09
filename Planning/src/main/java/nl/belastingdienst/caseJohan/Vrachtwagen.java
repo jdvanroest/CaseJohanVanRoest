@@ -1,12 +1,14 @@
+package nl.belastingdienst.caseJohan;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Vrachtwagen {
     @Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //todo check how generatedvalue works
     private int id;
     private Merk merk;
     private String kenteken;

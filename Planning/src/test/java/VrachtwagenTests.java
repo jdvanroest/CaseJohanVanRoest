@@ -1,3 +1,5 @@
+import nl.belastingdienst.caseJohan.Merk;
+import nl.belastingdienst.caseJohan.Vrachtwagen;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,16 +33,5 @@ public class VrachtwagenTests {
         Assertions.assertThat(vrachtwagen1().getGewicht()).isEqualTo(13500);
         Assertions.assertThat(vrachtwagen1().getMerk()).isEqualTo(Merk.SCANIA);
 
-     }
-
-    @Test
-    @DisplayName("testen vrachtwagenobject aanmaken")
-    void testIdTelkens1Hoger(){
-        //arrange
-
-        //act
-
-        //assert
-        Assertions.assertThat(2).isEqualTo(2);
      }
 }
