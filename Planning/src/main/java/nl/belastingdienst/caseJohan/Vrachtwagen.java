@@ -1,13 +1,15 @@
 package nl.belastingdienst.caseJohan;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
 public class Vrachtwagen {
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     //todo check how generatedvalue works
     private int id;
@@ -18,8 +20,7 @@ public class Vrachtwagen {
 
     private LocalDate apkDatum;
 
-    public Vrachtwagen(int id, Merk merk, String kenteken, int gewicht, int kilometerstand, LocalDate apkDatum) {
-        this.id = id;
+    public Vrachtwagen(Merk merk, String kenteken, int gewicht, int kilometerstand, LocalDate apkDatum) {
         this.merk = merk;
         setKenteken(kenteken);
         this.gewicht = gewicht;

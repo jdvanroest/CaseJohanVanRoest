@@ -32,18 +32,16 @@ public class DatabaseTests {
         String persistenceUnitName = "jpa-hiber-postgres-pu";
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
         EntityManager em = emf.createEntityManager();
-
-
-
+        
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();
-        em.persist(new Vrachtwagen(1, Merk.DAF, "5-LPV-50", 15000, 143758, LocalDate.of(2022,11,21)));
-        em.persist(new Vrachtwagen(2, Merk.DAF, "5-LPV-51", 15000, 103427, LocalDate.of(2023,1,2)));
-        em.persist(new Vrachtwagen(3, Merk.SCANIA, "5-LPV-52", 15000, 96045, LocalDate.of(2022,12,7)));
-        em.persist(new Vrachtwagen(4, Merk.SCANIA, "5-LPV-53", 15000, 183507, LocalDate.of(2023,5,15)));
-        em.persist(new Vrachtwagen(5, Merk.DAF, "5-LPV-54",15000, 305467, LocalDate.of(2023,10,17)));
-        Vrachtwagen v = new Vrachtwagen(6, Merk.DAF, "5-LPV-55", 15000, 143758, LocalDate.of(2022,11,21));
+        em.persist(new Vrachtwagen(Merk.DAF, "5-LPV-50", 15000, 143758, LocalDate.of(2022,11,21)));
+        em.persist(new Vrachtwagen(Merk.DAF, "5-LPV-51", 15000, 103427, LocalDate.of(2023,1,2)));
+        em.persist(new Vrachtwagen(Merk.SCANIA, "5-LPV-52", 15000, 96045, LocalDate.of(2022,12,7)));
+        em.persist(new Vrachtwagen(Merk.SCANIA, "5-LPV-53", 15000, 183507, LocalDate.of(2023,5,15)));
+        em.persist(new Vrachtwagen(Merk.DAF, "5-LPV-54",15000, 305467, LocalDate.of(2023,10,17)));
+        Vrachtwagen v = new Vrachtwagen(Merk.DAF, "5-LPV-55", 15000, 143758, LocalDate.of(2022,11,21));
         em.persist(v);
         tx.commit();
     }
@@ -60,7 +58,7 @@ public class DatabaseTests {
 
         EntityTransaction tx = em.getTransaction();
         //act
-        Vrachtwagen v2 = invoerenVrachtwagen.makenVrachtwagen();
+        Vrachtwagen v2 = invoerenVrachtwagen.makenVrachtwagenMetScanner();
         tx.begin();
         em.persist(v2);
         tx.commit();
