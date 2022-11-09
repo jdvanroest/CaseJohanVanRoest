@@ -18,7 +18,6 @@ public class VrachtwagenFactory {
 //            } catch (IllegalArgumentException e) {
 //                System.out.println("Verkeerde invoer. Kies uit SCANIA , DAF, MAN, MERCEDES, VOLVO, RENAULT");
 //            }
-//
 //        }
 //
 //        System.out.println("Voer het kenteken van de vrachtwagen in");
@@ -31,7 +30,7 @@ public class VrachtwagenFactory {
         int kilometerstand = Integer.parseInt(scanner.nextLine());
         System.out.println("De kilometerstand is " + kilometerstand);
 
-        Vrachtwagen vrachtwagen = new Vrachtwagen(1, Merk.MAN, "5-LPV-53", gewicht, kilometerstand, LocalDate.of(2023, 10, 17));
+        Vrachtwagen vrachtwagen = new Vrachtwagen(1, Merk.SCANIA, "5-LPV-53", gewicht, kilometerstand, LocalDate.of(2023, 10, 17));
 
         return vrachtwagen;
     }

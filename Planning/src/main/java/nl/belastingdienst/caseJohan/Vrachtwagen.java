@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class Vrachtwagen {
     @Id
+
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     //todo check how generatedvalue works
     private int id;
