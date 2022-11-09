@@ -1,7 +1,7 @@
 
-import nl.belastingdienst.caseJohan.VrachtwagenFactory;
-import nl.belastingdienst.caseJohan.Merk;
-import nl.belastingdienst.caseJohan.Vrachtwagen;
+import nl.belastingdienst.caseJohan.*;
+import nl.belastingdienst.caseJohan.enums.LengteChassis;
+import nl.belastingdienst.caseJohan.enums.Merk;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DatabaseTests {
 
+    private EntityManager getEntityManager(){
+        String persistenceUnitName = "jpa-hiber-postgres-pu";
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+        EntityManager em = emf.createEntityManager();
+        return em;
+
+    }
     @Test
     void showThatTheConnectionToPostgresIsNotNull() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/cursistdb";
@@ -28,7 +35,7 @@ public class DatabaseTests {
 
 
     @Test
-    void persistVrachtwagenWithoutAGeneratedValue(){
+    void persistVrachtwagenWithAGeneratedValue(){
         String persistenceUnitName = "jpa-hiber-postgres-pu";
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
         EntityManager em = emf.createEntityManager();
@@ -66,4 +73,25 @@ public class DatabaseTests {
         //assert
         assertThat(2).isEqualTo(2);
      }
+
+     @Test
+     @DisplayName("testen persist chassis")
+     void testPersistChassis(){
+         //arrange
+         EntityManager em = getEntityManager();
+         EntityTransaction tx = em.getTransaction();
+
+//         String persistenceUnitName = "jpa-hiber-postgres-pu";
+//         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+//         EntityManager em = emf.createEntityManager();
+//
+//         EntityTransaction tx = em.getTransaction();
+         //act
+         tx.begin();
+         em.persist(new Chassis("5-HPD-80", 5600, LengteChassis.FT20, LocalDate.of(2011,1,2)));
+         tx.commit();
+         //assert
+         assertThat(2).isEqualTo(2);
+      }
+
 }

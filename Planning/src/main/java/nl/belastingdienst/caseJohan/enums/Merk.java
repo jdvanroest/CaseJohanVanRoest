@@ -1,4 +1,4 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.enums;
 
 public enum Merk {
 

@@ -1,5 +1,7 @@
 package nl.belastingdienst.caseJohan;
 
+import nl.belastingdienst.caseJohan.enums.Merk;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 

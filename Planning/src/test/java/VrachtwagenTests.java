@@ -1,5 +1,4 @@
-import nl.belastingdienst.caseJohan.EerstKeuzemenu;
-import nl.belastingdienst.caseJohan.Merk;
+import nl.belastingdienst.caseJohan.enums.Merk;
 import nl.belastingdienst.caseJohan.Vrachtwagen;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
