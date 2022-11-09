@@ -1,3 +1,4 @@
+import nl.belastingdienst.caseJohan.EerstKeuzemenu;
 import nl.belastingdienst.caseJohan.Merk;
 import nl.belastingdienst.caseJohan.Vrachtwagen;
 import org.assertj.core.api.Assertions;

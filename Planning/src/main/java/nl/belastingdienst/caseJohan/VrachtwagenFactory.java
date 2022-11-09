@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class VrachtwagenFactory {
+    Scanner scanner = new Scanner(System.in);
 
     public Vrachtwagen makenVrachtwagenMetScanner() {
-        Scanner scanner = new Scanner(System.in);
         Merk m = Merk.NOTDEFINEDYET;
         System.out.println("Voer het merk van de vrachtwagen in. Kies uit SCANIA , DAF, MAN, MERCEDES, VOLVO, RENAULT");
         for (int i = 1; i <= 2; i += 1) {
@@ -31,6 +31,8 @@ public class VrachtwagenFactory {
         int kilometerstand = Integer.parseInt(scanner.nextLine());
         System.out.println("De kilometerstand is " + kilometerstand);
 
+//        System.out.println("\n" +"Voer de apkdatum van de vrachtwagen in");
+//        LocalDate apkdatum = LocalDate.parse(scanner.nextLine());
 
         Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, LocalDate.of(2023, 10, 17));
 
