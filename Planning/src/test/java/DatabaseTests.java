@@ -81,11 +81,6 @@ public class DatabaseTests {
          EntityManager em = getEntityManager();
          EntityTransaction tx = em.getTransaction();
 
-//         String persistenceUnitName = "jpa-hiber-postgres-pu";
-//         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
-//         EntityManager em = emf.createEntityManager();
-//
-//         EntityTransaction tx = em.getTransaction();
          //act
          tx.begin();
          em.persist(new Chassis("5-HPD-80", 5600, LengteChassis.FT20, LocalDate.of(2011,1,2)));
@@ -94,4 +89,20 @@ public class DatabaseTests {
          assertThat(2).isEqualTo(2);
       }
 
+      @Test
+      @DisplayName("testen zelf invoeren chassis")
+      void testInvoerenChassis(){
+          //arrange
+          EntityManager em = getEntityManager();
+          EntityTransaction tx = em.getTransaction();
+          ChassisFactory chassisFactory = new ChassisFactory();
+
+          //act
+          Chassis chassis = chassisFactory.makenChassisMetScanner();
+          tx.begin();
+          em.persist(chassis);
+          tx.commit();
+          //assert
+          assertThat(2).isEqualTo(2);
+       }
 }

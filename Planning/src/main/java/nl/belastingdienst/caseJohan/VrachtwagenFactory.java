@@ -3,6 +3,7 @@ package nl.belastingdienst.caseJohan;
 import nl.belastingdienst.caseJohan.enums.Merk;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class VrachtwagenFactory {
@@ -33,10 +34,12 @@ public class VrachtwagenFactory {
         int kilometerstand = Integer.parseInt(scanner.nextLine());
         System.out.println("De kilometerstand is " + kilometerstand);
 
-//        System.out.println("\n" +"Voer de apkdatum van de vrachtwagen in");
-//        LocalDate apkdatum = LocalDate.parse(scanner.nextLine());
+        System.out.println("\n" +"Voer de apkdatum van de vrachtwagen in");
+        String str = scanner.nextLine();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate apkdatum = LocalDate.parse(str, dtf);
 
-        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, LocalDate.of(2023, 10, 17));
+        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum);
 
         return vrachtwagen;
     }

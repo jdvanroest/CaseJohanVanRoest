@@ -12,8 +12,6 @@ import java.time.LocalDate;
 public class Vrachtwagen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
-    //todo check how generatedvalue works
     private int id;
     private Merk merk;
     private String kenteken;

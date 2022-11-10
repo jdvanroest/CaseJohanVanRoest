@@ -1,6 +1,5 @@
 import nl.belastingdienst.caseJohan.Chassis;
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
-import nl.belastingdienst.caseJohan.Vrachtwagen;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ public class ChassisTests {
         @DisplayName("Check of class Chassis attributen merk, kenteken, gewicht, kilometerstand en apkDatum heeft")
         void testChassis(){
             //assert
-            Assertions.assertThat(Vrachtwagen.class).hasDeclaredFields("merk", "kenteken","gewicht", "kilometerstand", "apkDatum");
+            Assertions.assertThat(Chassis.class).hasDeclaredFields("kenteken","gewicht", "apkDatum");
         }
 
 
