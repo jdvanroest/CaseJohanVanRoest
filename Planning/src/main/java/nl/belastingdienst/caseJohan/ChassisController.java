@@ -2,12 +2,15 @@ package nl.belastingdienst.caseJohan;
 
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class ChassisFactory {
+public class ChassisController {
     Scanner scanner = new Scanner(System.in);
+    CreateEntityManager createEntityManager = new CreateEntityManager();
 
     public Chassis makenChassisMetScanner(){
         LengteChassis lengteChassis = LengteChassis.NOTDEFINEDYET;
@@ -24,11 +27,18 @@ public class ChassisFactory {
         lengteChassis = LengteChassis.valueOf(s);
         System.out.println("De lengte is " + lengteChassis);
 
-        System.out.println("voer de apkdatum datum [dd.mm.yyyy] van het chassis in ");
+        System.out.println("voer de apkdatum [dd.mm.yyyy] van het chassis in ");
         String str = scanner.nextLine();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate apkdatum = LocalDate.parse(str, dtf);
 
-        return new Chassis(kenteken, gewicht, lengteChassis, apkdatum);
+        EntityManager em = createEntityManager.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        Chassis chassis = new Chassis(kenteken, gewicht, lengteChassis, apkdatum);
+        em.persist(chassis);
+        tx.commit();
+        return chassis;
     }
+
 }

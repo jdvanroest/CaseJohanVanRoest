@@ -2,12 +2,15 @@ package nl.belastingdienst.caseJohan;
 
 import nl.belastingdienst.caseJohan.enums.Merk;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class VrachtwagenFactory {
+public class VrachtwagenController {
     Scanner scanner = new Scanner(System.in);
+    CreateEntityManager createEntityManager = new CreateEntityManager();
 
     public Vrachtwagen makenVrachtwagenMetScanner() {
         Merk m = Merk.NOTDEFINEDYET;
@@ -34,12 +37,17 @@ public class VrachtwagenFactory {
         int kilometerstand = Integer.parseInt(scanner.nextLine());
         System.out.println("De kilometerstand is " + kilometerstand);
 
-        System.out.println("\n" +"Voer de apkdatum van de vrachtwagen in");
+        System.out.println("\n" +"Voer de apkdatum [dd.mm.yyyy] van de vrachtwagen in");
         String str = scanner.nextLine();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate apkdatum = LocalDate.parse(str, dtf);
 
+        EntityManager em = createEntityManager.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
         Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum);
+        em.persist(vrachtwagen);
+        tx.commit();
 
         return vrachtwagen;
     }

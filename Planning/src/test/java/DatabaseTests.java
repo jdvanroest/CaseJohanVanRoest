@@ -57,7 +57,7 @@ public class DatabaseTests {
     @DisplayName("testen zelf invoeren vrachtwagen")
     void testInvoerenVrachtwagen(){
         //arrange
-        VrachtwagenFactory invoerenVrachtwagen = new VrachtwagenFactory();
+        VrachtwagenController invoerenVrachtwagen = new VrachtwagenController();
 
         String persistenceUnitName = "jpa-hiber-postgres-pu";
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
@@ -95,10 +95,10 @@ public class DatabaseTests {
           //arrange
           EntityManager em = getEntityManager();
           EntityTransaction tx = em.getTransaction();
-          ChassisFactory chassisFactory = new ChassisFactory();
+          ChassisController chassisController = new ChassisController();
 
           //act
-          Chassis chassis = chassisFactory.makenChassisMetScanner();
+          Chassis chassis = chassisController.makenChassisMetScanner();
           tx.begin();
           em.persist(chassis);
           tx.commit();
