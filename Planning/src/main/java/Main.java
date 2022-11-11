@@ -1,6 +1,6 @@
 import nl.belastingdienst.caseJohan.Menu.EerstKeuzemenu;
 
-public class Start {
+public class Main {
 
     public static void main(String[] args){
         EerstKeuzemenu eerstKeuzemenu = new EerstKeuzemenu();

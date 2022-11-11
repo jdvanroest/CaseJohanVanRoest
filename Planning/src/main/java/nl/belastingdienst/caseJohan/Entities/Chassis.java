@@ -11,6 +11,7 @@ public class Chassis {
     @Id
     @GeneratedValue
     private int id;
+   @Column(unique = true)
     private String kenteken;
     private int gewicht;
     private LengteChassis lengteChassis;

@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CreateApkDatumLijst {
@@ -39,5 +41,57 @@ public class CreateApkDatumLijst {
         }
 
         tx.commit();
+    }
+
+    public void VrachtwagenEnChassisAPKLijstMaken(){
+        tx.begin();
+        //lijst apkdata en kentekens van vrachtwagens uit database halen
+        Query queryVrachtwagen = em.createQuery("Select v.apkDatum, v.kenteken From Vrachtwagen v ");
+        List<Object[]> apkLijstVrachtwagen = queryVrachtwagen.getResultList();
+
+        //lijst apkdata en kentekens van chassis uit database halen
+        Query queryChassis = em.createQuery("Select c.apkDatum, c.kenteken From Chassis c");
+        List<Object[]> apkLijstChassis = queryChassis.getResultList();
+
+        //lijsten samenvoegen
+        List<Object[]> totaallijstAPK = new ArrayList<>();
+        totaallijstAPK.addAll(apkLijstChassis);
+        totaallijstAPK.addAll(apkLijstVrachtwagen);
+
+        //lijsten sorteren
+        ArrayList<ApkDatum> apkData = new ArrayList<>();
+        for(Object[] apk : totaallijstAPK){
+            apkData.add(new ApkDatum((String)apk[1], (LocalDate)apk[0]));
+        }
+        Collections.sort(apkData);
+
+        for(ApkDatum apkdatum : apkData){
+            System.out.println(apkdatum);
+        }
+        tx.commit();
+    }
+    private class ApkDatum implements Comparable<ApkDatum> {
+        private LocalDate apk;
+        private String kenteken;
+
+
+        public ApkDatum(String kenteken, LocalDate apk) {
+            this.kenteken = kenteken;
+            this.apk = apk;
+        }
+
+        @Override
+        public int compareTo(ApkDatum ad) {
+            if (apk.equals(ad.apk))
+                return 0;
+            else if (apk.isAfter(ad.apk))
+                return 1;
+            else
+                return -1;
+        }
+        @Override
+        public String toString(){
+            return "kenteken " + kenteken + " apkdatum " + apk;
+        }
     }
 }

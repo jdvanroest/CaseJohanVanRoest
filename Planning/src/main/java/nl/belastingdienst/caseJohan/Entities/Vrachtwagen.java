@@ -11,6 +11,7 @@ public class Vrachtwagen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Merk merk;
+    @Column(unique = true)
     private String kenteken;
     private int gewicht; // ledig gewicht van de vrachtwagen in kilo's
     private int kilometerstand;

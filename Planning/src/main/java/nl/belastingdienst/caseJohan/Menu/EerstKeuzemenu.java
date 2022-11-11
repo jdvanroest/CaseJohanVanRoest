@@ -4,13 +4,11 @@ import nl.belastingdienst.caseJohan.Controllers.ChassisController;
 import nl.belastingdienst.caseJohan.Controllers.CreateApkDatumLijst;
 import nl.belastingdienst.caseJohan.Controllers.TankController;
 import nl.belastingdienst.caseJohan.Controllers.VrachtwagenController;
-import nl.belastingdienst.caseJohan.Entities.Chassis;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Scanner;
-//todo keuzemenu afmaken
-public class EerstKeuzemenu {
 
+public class EerstKeuzemenu {
+    //todo keuzemenu afmaken
     Scanner scanner = new Scanner(System.in);
 
     public void start() {
@@ -86,6 +84,10 @@ public class EerstKeuzemenu {
                 break;
             case 2:
                 createApkDatumLijst.chassisApkLijstMaken();
+                break;
+            case 3:
+                createApkDatumLijst.VrachtwagenEnChassisAPKLijstMaken();
+                break;
         }
     }
 }
