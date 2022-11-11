@@ -1,5 +1,8 @@
 
-import nl.belastingdienst.caseJohan.*;
+import nl.belastingdienst.caseJohan.Controllers.ChassisController;
+import nl.belastingdienst.caseJohan.Controllers.VrachtwagenController;
+import nl.belastingdienst.caseJohan.Entities.Chassis;
+import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 import nl.belastingdienst.caseJohan.enums.Merk;
 import org.junit.jupiter.api.DisplayName;

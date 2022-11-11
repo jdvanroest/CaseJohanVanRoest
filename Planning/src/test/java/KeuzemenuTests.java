@@ -1,4 +1,4 @@
-import nl.belastingdienst.caseJohan.EerstKeuzemenu;
+import nl.belastingdienst.caseJohan.Menu.EerstKeuzemenu;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

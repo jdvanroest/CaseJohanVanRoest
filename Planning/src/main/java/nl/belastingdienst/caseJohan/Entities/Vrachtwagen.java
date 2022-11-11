@@ -1,11 +1,8 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Entities;
 
 import nl.belastingdienst.caseJohan.enums.Merk;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -17,6 +14,9 @@ public class Vrachtwagen {
     private String kenteken;
     private int gewicht; // ledig gewicht van de vrachtwagen in kilo's
     private int kilometerstand;
+
+    @OneToOne
+    Chassis chassis;
 
     private LocalDate apkDatum;
 
@@ -67,4 +67,5 @@ public class Vrachtwagen {
     public void setApkDatum(LocalDate apkDatum) {
         this.apkDatum = apkDatum;
     }
+
 }

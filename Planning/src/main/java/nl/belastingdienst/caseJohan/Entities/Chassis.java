@@ -1,11 +1,10 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Entities;
 
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+
 
 @Entity
 public class Chassis {
@@ -16,6 +15,9 @@ public class Chassis {
     private int gewicht;
     private LengteChassis lengteChassis;
     private LocalDate apkDatum;
+
+    @OneToOne(mappedBy = "chassis")
+    Vrachtwagen vrachtwagen;
 
     public Chassis(String kenteken, int gewicht, LengteChassis lengteChassis, LocalDate apkdatum){
         this.kenteken = kenteken;

@@ -1,8 +1,9 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Tank {
@@ -22,4 +23,7 @@ public class Tank {
     public Tank(){ }
 
 
+    public int getId() {
+        return id;
+    }
 }

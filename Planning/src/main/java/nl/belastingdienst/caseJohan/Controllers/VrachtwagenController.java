@@ -1,9 +1,11 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Controllers;
 
+import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
 import nl.belastingdienst.caseJohan.enums.Merk;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -50,6 +52,19 @@ public class VrachtwagenController {
         tx.commit();
 
         return vrachtwagen;
+    }
+
+    public void verwijderenVrachtwagenMetScanner(){
+        EntityManager em = createEntityManager.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        System.out.println("\n" + "Voer het kenteken van de vrachtwagen in");
+        String kentekenVrachtwagen = scanner.nextLine();
+        System.out.println("Het kenteken is " + kentekenVrachtwagen);
+        tx.begin();
+        TypedQuery vrachtwagenToRemove = em.createQuery("SELECT v from Vrachtwagen v WHERE v.kenteken = '" + kentekenVrachtwagen + "'", Vrachtwagen.class );
+        em.remove(vrachtwagenToRemove.getSingleResult());
+        tx.commit();
     }
 }
 

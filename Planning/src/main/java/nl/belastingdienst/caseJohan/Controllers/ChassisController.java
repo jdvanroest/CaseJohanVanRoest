@@ -1,9 +1,11 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Controllers;
 
+import nl.belastingdienst.caseJohan.Entities.Chassis;
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -41,4 +43,16 @@ public class ChassisController {
         return chassis;
     }
 
+    public void verwijderenChassisMetScanner(){
+        EntityManager em = createEntityManager.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        System.out.println("\n" + "Voer het kenteken van het chassis in");
+        String kentekenChassis = scanner.nextLine();
+        System.out.println("Het kenteken is " + kentekenChassis);
+        tx.begin();
+       TypedQuery chassisToRemove = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
+        em.remove(chassisToRemove);
+        tx.commit();
+    }
 }

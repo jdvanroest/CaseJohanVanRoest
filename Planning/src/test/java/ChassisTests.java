@@ -1,4 +1,4 @@
-import nl.belastingdienst.caseJohan.Chassis;
+import nl.belastingdienst.caseJohan.Entities.Chassis;
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

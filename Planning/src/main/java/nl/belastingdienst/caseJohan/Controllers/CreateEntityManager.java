@@ -1,4 +1,4 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Controllers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -1,5 +1,5 @@
 import nl.belastingdienst.caseJohan.enums.Merk;
-import nl.belastingdienst.caseJohan.Vrachtwagen;
+import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

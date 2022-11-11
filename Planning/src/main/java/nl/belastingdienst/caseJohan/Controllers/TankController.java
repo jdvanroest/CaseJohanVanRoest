@@ -1,7 +1,10 @@
-package nl.belastingdienst.caseJohan;
+package nl.belastingdienst.caseJohan.Controllers;
+
+import nl.belastingdienst.caseJohan.Entities.Tank;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import java.util.Scanner;
 
 public class TankController {
@@ -28,5 +31,19 @@ public class TankController {
         tx.commit();
 
         return tank;
+    }
+
+    public void verwijderenTankMetScanner(){
+        EntityManager em = createEntityManager.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        System.out.println("\n" + "Voer de naam van de tank in");
+        String tanknaam = scanner.nextLine();
+        System.out.println("De naam is " + tanknaam);
+
+        tx.begin();
+        TypedQuery tankToRemoveQuery = em.createQuery("SELECT t from Tank t WHERE t.naam = '" + tanknaam + "'", Tank.class);
+        em.remove(tankToRemoveQuery.getSingleResult());
+        tx.commit();
     }
 }

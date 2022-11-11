@@ -1,4 +1,4 @@
-import nl.belastingdienst.caseJohan.EerstKeuzemenu;
+import nl.belastingdienst.caseJohan.Menu.EerstKeuzemenu;
 
 public class Start {
 
