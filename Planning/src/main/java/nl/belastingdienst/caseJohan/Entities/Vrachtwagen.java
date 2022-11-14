@@ -76,5 +76,7 @@ public class Vrachtwagen {
     public void setLocatieVrachtwagen(Locatie locatieVrachtwagen){this.locatieVrachtwagen = locatieVrachtwagen;}
 
     public void setChassisAchterVrachtwagen(Chassis chassisVrachtwagen){this.chassis = chassisVrachtwagen;}
+
+    public Chassis getChassis(){return chassis;}
 }
 

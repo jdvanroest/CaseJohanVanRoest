@@ -15,19 +15,23 @@ public class Keuzemenu {
     int keuzeChassis = 0;
     int keuzeVrachtwagen = 0;
     int keuze = 0;
+    int keuzeChassisLocatieWeergeven= 0;
+    int keuzeChassisVrachtwagenWeergeven =0;
+
     public void start() {
         System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Vrachtwagen toevoegen/verwijderen/locatie updaten/chassis aankoppelen" +
                 "\n" + "(2)Chassis toevoegen/verwijderen" + "\n" + "(3)Tank toevoegen/verwijderen" + "\n" +
                 "(4)Lijst APK data weergeven" + "\n" + "(5)Locatie van een chassis weergeven" + "\n" +
                 "(6)Chassis achter vrachtwagen weergeven" + "\n" + "(7)Transportopdracht plannen");
 
-
         keuze = Integer.parseInt(scanner.nextLine());
+
         tweedeKeuzeMenu();
     }
 
 
     public void tweedeKeuzeMenu() {
+
         switch (keuze) {
             case 1:
                 System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Vrachtwagen toevoegen" + "\n" +
@@ -55,10 +59,20 @@ public class Keuzemenu {
                 keuzeApkLijst();
                 break;
             case 5:
+                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Locatie chassis weergeven"
+                        + "\n" +  "(2)Terug naar startmenu");
+                keuzeChassisLocatieWeergeven = Integer.parseInt(scanner.nextLine());
                 keuzeChassisLocatieWeergeven();
+                break;
+            case 6:
+                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Chassis achter vrachtwagen weergeven"
+                        + "\n" +  "(2)Terug naar startmenu");
+                keuzeChassisVrachtwagenWeergeven = Integer.parseInt(scanner.nextLine());
+                keuzeChassisVrachtwagenWeergeven();
                 break;
         }
     }
+
 
     public void keuzeVrachtwagen() {
         VrachtwagenController vrachtwagenController = new VrachtwagenController();
@@ -108,31 +122,47 @@ public class Keuzemenu {
                 break;
         }
     }
-        public void keuzeApkLijst() {
-            CreateApkDatumLijst createApkDatumLijst = new CreateApkDatumLijst();
-            switch (keuzeApkLijst) {
-                case 1:
-                    createApkDatumLijst.vrachtwagenApkLijstMaken();
-                    keuzeApkLijst();
-                    break;
-                case 2:
-                    createApkDatumLijst.chassisApkLijstMaken();
-                    keuzeApkLijst();
-                    break;
-                case 3:
-                    createApkDatumLijst.VrachtwagenEnChassisAPKLijstMaken();
-                    keuzeApkLijst();
-                    break;
-                case 4:
-                    tweedeKeuzeMenu();
-                    break;
+    public void keuzeApkLijst() {
+        CreateApkDatumLijst createApkDatumLijst = new CreateApkDatumLijst();
+        switch (keuzeApkLijst) {
+            case 1:
+                createApkDatumLijst.vrachtwagenApkLijstMaken();
+                keuzeApkLijst();
+                break;
+            case 2:
+                createApkDatumLijst.chassisApkLijstMaken();
+                keuzeApkLijst();
+                break;
+            case 3:
+                createApkDatumLijst.VrachtwagenEnChassisAPKLijstMaken();
+                keuzeApkLijst();
+                break;
+            case 4:
+                start();
+                break;
             }
         }
-
-        public void keuzeChassisLocatieWeergeven(){
+    public void keuzeChassisLocatieWeergeven() {
         ChassisController chassisController = new ChassisController();
-            chassisController.locatieChassis();
-            tweedeKeuzeMenu();
+        switch (keuzeChassisLocatieWeergeven) {
+            case 1:
+                chassisController.locatieChassis();
+                tweedeKeuzeMenu();
+                break;
+            case 2:
+                start();
+                break;
+            }
         }
-
+     public void keuzeChassisVrachtwagenWeergeven(){
+        VrachtwagenController vrachtwagenController = new VrachtwagenController();
+        switch (keuzeChassisVrachtwagenWeergeven){
+            case 1:
+                vrachtwagenController.aangekoppeldeChassisWeergeven();
+                tweedeKeuzeMenu();
+            case 2:
+                start();
+                break;
+        }
+    }
 }

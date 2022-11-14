@@ -1,3 +1,4 @@
+import nl.belastingdienst.caseJohan.Controllers.VrachtwagenController;
 import nl.belastingdienst.caseJohan.Entities.Chassis;
 import nl.belastingdienst.caseJohan.Entities.Locatie;
 import nl.belastingdienst.caseJohan.enums.Merk;
@@ -45,6 +46,16 @@ public class VrachtwagenTests {
 
      }
 
+     @Test
+     @DisplayName("welk chassis achter vrachtwagen")
+     void testWelkChassisAchterVrachtwagen(){
+         //arrange
+         VrachtwagenController vrachtwagenController = new VrachtwagenController();
+         //act
+         vrachtwagenController.aangekoppeldeChassisWeergeven();
+         //assert
+         Assertions.assertThat(2).isEqualTo(2);
+      }
      @Test
      @DisplayName("testen of id elke keer 1 hoger wordt")
      void testID(){

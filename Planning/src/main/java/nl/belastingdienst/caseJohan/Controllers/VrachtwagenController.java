@@ -8,6 +8,7 @@ import nl.belastingdienst.caseJohan.enums.Merk;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -56,6 +57,17 @@ public class VrachtwagenController {
         tx.commit();
 
         return vrachtwagen;
+    }
+
+    public void aangekoppeldeChassisWeergeven(){
+        System.out.println("Voer het kenteken van de vrachtwagen waarvan je het chassis wilt weten in");
+        String kentekenVrachtwagen = scanner.nextLine();
+        tx.begin();
+        TypedQuery<Vrachtwagen> vrachtwagenToFind = em.createQuery("SELECT v from Vrachtwagen v WHERE " +
+                "v.kenteken = '" + kentekenVrachtwagen + "'", Vrachtwagen.class );
+        Vrachtwagen vrachtwagenChassis = em.find(Vrachtwagen.class, vrachtwagenToFind.getSingleResult().getId());
+        System.out.println(vrachtwagenChassis.getChassis().getKenteken());
+        tx.commit();
     }
 
     public void chassisAankoppelen(){
