@@ -1,6 +1,7 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.Entities.Chassis;
+import nl.belastingdienst.caseJohan.Entities.Locatie;
 import nl.belastingdienst.caseJohan.enums.LengteChassis;
 
 import javax.persistence.EntityManager;
@@ -11,10 +12,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ChassisController {
+
     Scanner scanner = new Scanner(System.in);
     CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManager em = createEntityManager.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
 
-    public Chassis makenChassisMetScanner(){
+    public Chassis makenChassisMetScanner () {
         LengteChassis lengteChassis = LengteChassis.NOTDEFINEDYET;
         System.out.println("Voer het kenteken van het chassis in");
         String kenteken = scanner.nextLine();
@@ -34,25 +38,33 @@ public class ChassisController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate apkdatum = LocalDate.parse(str, dtf);
 
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
+        System.out.println("Voer de locatie van het chassis in");
+        String locatie = scanner.nextLine();
+
+
         tx.begin();
-        Chassis chassis = new Chassis(kenteken, gewicht, lengteChassis, apkdatum);
+        Chassis chassis = new Chassis(kenteken, gewicht, lengteChassis, apkdatum, em.find(Locatie.class, locatie));
         em.persist(chassis);
         tx.commit();
         return chassis;
     }
-
-    public void verwijderenChassisMetScanner(){
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
+    public void verwijderenChassisMetScanner () {
         System.out.println("\n" + "Voer het kenteken van het chassis in");
         String kentekenChassis = scanner.nextLine();
         System.out.println("Het kenteken is " + kentekenChassis);
         tx.begin();
-       TypedQuery chassisToRemove = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
+        TypedQuery chassisToRemove = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
         em.remove(chassisToRemove);
+        tx.commit();
+    }
+
+    public void locatieChassis(){
+        System.out.println("Voer het kenteken van het chassis waarvan je de locatie wil weten in");
+        String kentekenChassis = scanner.nextLine();
+        tx.begin();
+        TypedQuery<Chassis> chassisToFindLocation = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
+        em.find(Chassis.class, chassisToFindLocation.getSingleResult().getId());
+        System.out.println(kentekenChassis + " is op locatie " + chassisToFindLocation.getSingleResult().getLocatie()); //todo kenteken is op locatie nl.belastingdienst.caseJohan.Entities.Locatie@5503de1
         tx.commit();
     }
 }

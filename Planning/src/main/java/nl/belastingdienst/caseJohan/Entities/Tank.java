@@ -1,9 +1,6 @@
 package nl.belastingdienst.caseJohan.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Tank {
@@ -13,6 +10,9 @@ public class Tank {
     private String naam;
     private int gewicht;
     private int inhoud; // inhoud in liters
+
+    @OneToOne
+    Locatie locatieTank;
 
     public Tank(String naam, int gewicht, int inhoud) {
         this.naam = naam;

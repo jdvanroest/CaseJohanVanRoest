@@ -1,16 +1,26 @@
+import nl.belastingdienst.caseJohan.Entities.Chassis;
+import nl.belastingdienst.caseJohan.Entities.Locatie;
 import nl.belastingdienst.caseJohan.enums.Merk;
 import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.time.LocalDate;
 
 public class VrachtwagenTests {
 
+    String persistenceUnitName = "jpa-hiber-postgres-pu";
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction tx = em.getTransaction();
 
     private Vrachtwagen vrachtwagen1(){
-        Vrachtwagen vrachtwagen1 = new Vrachtwagen(Merk.SCANIA, "5-HPD-49", 13500, 134750, LocalDate.of(2011,1,2));
+        Vrachtwagen vrachtwagen1 = new Vrachtwagen(Merk.SCANIA, "5-HPD-49", 13500, 134750, LocalDate.of(2011,1,2), em.find(Chassis.class, 1), em.find(Locatie.class, "parbot"));
         return vrachtwagen1;
     }
 
@@ -39,9 +49,9 @@ public class VrachtwagenTests {
      @DisplayName("testen of id elke keer 1 hoger wordt")
      void testID(){
          //arrange
-         Vrachtwagen vrachtwagen1 = new Vrachtwagen(Merk.DAF, "5-LPV-50", 15000, 143758, LocalDate.of(2022,11,21));
-         Vrachtwagen vrachtwagen2 = new Vrachtwagen(Merk.DAF, "5-LPV-51", 15000, 103427, LocalDate.of(2023, 1, 2));
-         Vrachtwagen vrachtwagen3 = new Vrachtwagen(Merk.SCANIA, "5-LPV-52", 15000, 96045, LocalDate.of(2022, 12, 7));
+         Vrachtwagen vrachtwagen1 = new Vrachtwagen(Merk.DAF, "5-LPV-50", 15000, 143758, LocalDate.of(2022,11,21), em.find(Chassis.class, 1), em.find(Locatie.class, "parbot"));
+         Vrachtwagen vrachtwagen2 = new Vrachtwagen(Merk.DAF, "5-LPV-51", 15000, 103427, LocalDate.of(2023, 1, 2), em.find(Chassis.class, 1), em.find(Locatie.class, "parbot"));
+         Vrachtwagen vrachtwagen3 = new Vrachtwagen(Merk.SCANIA, "5-LPV-52", 15000, 96045, LocalDate.of(2022, 12, 7), em.find(Chassis.class, 1), em.find(Locatie.class, "parbot"));
          //act
 
 

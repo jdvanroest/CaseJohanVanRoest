@@ -18,15 +18,19 @@ public class Vrachtwagen {
 
     @OneToOne
     Chassis chassis;
+    @OneToOne
+    Locatie locatieVrachtwagen;
 
     private LocalDate apkDatum;
 
-    public Vrachtwagen(Merk merk, String kenteken, int gewicht, int kilometerstand, LocalDate apkDatum) {
+    public Vrachtwagen(Merk merk, String kenteken, int gewicht, int kilometerstand, LocalDate apkDatum, Chassis chassis, Locatie locatieVrachtwagen) {
         this.merk = merk;
         setKenteken(kenteken);
         this.gewicht = gewicht;
         setKilometerstand(kilometerstand);
         setApkDatum(apkDatum);
+        this.chassis = chassis;
+        this.locatieVrachtwagen = locatieVrachtwagen;
     }
 
     public Vrachtwagen() {
@@ -69,4 +73,8 @@ public class Vrachtwagen {
         this.apkDatum = apkDatum;
     }
 
+    public void setLocatieVrachtwagen(Locatie locatieVrachtwagen){this.locatieVrachtwagen = locatieVrachtwagen;}
+
+    public void setChassisAchterVrachtwagen(Chassis chassisVrachtwagen){this.chassis = chassisVrachtwagen;}
 }
+

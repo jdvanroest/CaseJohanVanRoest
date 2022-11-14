@@ -1,9 +1,9 @@
-import nl.belastingdienst.caseJohan.Menu.EerstKeuzemenu;
+import nl.belastingdienst.caseJohan.Menu.Keuzemenu;
 
 public class Main {
 
     public static void main(String[] args){
-        EerstKeuzemenu eerstKeuzemenu = new EerstKeuzemenu();
+        Keuzemenu eerstKeuzemenu = new Keuzemenu();
         eerstKeuzemenu.start();
     }
 }

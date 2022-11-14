@@ -1,5 +1,7 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
+import nl.belastingdienst.caseJohan.Entities.Chassis;
+import nl.belastingdienst.caseJohan.Entities.Locatie;
 import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
 import nl.belastingdienst.caseJohan.enums.Merk;
 
@@ -13,6 +15,8 @@ import java.util.Scanner;
 public class VrachtwagenController {
     Scanner scanner = new Scanner(System.in);
     CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManager em = createEntityManager.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
 
     public Vrachtwagen makenVrachtwagenMetScanner() {
         Merk m = Merk.NOTDEFINEDYET;
@@ -47,17 +51,42 @@ public class VrachtwagenController {
         EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum);
+        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum, em.find(Chassis.class, null), em.find(Locatie.class, "parbed"));
         em.persist(vrachtwagen);
         tx.commit();
 
         return vrachtwagen;
     }
 
-    public void verwijderenVrachtwagenMetScanner(){
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
+    public void chassisAankoppelen(){
+        System.out.println("\n" + "Voer het kenteken in van de vrachtwagen die het chassis aankoppeld");
+        String kentekenVrachtwagen = scanner.nextLine();
+        System.out.println("Voer kenteken in van het chassis dat aangekoppeld moet worden");
+        String kentekenChassis = scanner.nextLine();
+        tx.begin();
+        TypedQuery<Vrachtwagen> vrachtwagenToFind = em.createQuery("SELECT v from Vrachtwagen v WHERE " +
+                "v.kenteken = '" + kentekenVrachtwagen + "'", Vrachtwagen.class );
+        Vrachtwagen vrachtwagenToUpdate = em.find(Vrachtwagen.class, vrachtwagenToFind.getSingleResult().getId());
+        TypedQuery<Chassis> chassisToFind = em.createQuery("SELECT c From Chassis c WHERE " +
+                "c.kenteken = '" + kentekenChassis +"'", Chassis.class);
+        Chassis gewensteChassis = em.find(Chassis.class, chassisToFind.getSingleResult().getId());
+        vrachtwagenToUpdate.setChassisAchterVrachtwagen(gewensteChassis);
+        tx.commit();
+    }
 
+    public void vrachtwagenLocatieUpdaten(){
+        System.out.println("Voer het kenteken van de vrachtwagen in");
+        String kentekenVrachtwagen = scanner.nextLine();
+        System.out.println("Voer de locatiecode van de nieuwe locatie in");
+        String locatiePK = scanner.nextLine();
+        tx.begin();
+        TypedQuery<Vrachtwagen> vrachtwagenToFind = em.createQuery("SELECT v from Vrachtwagen v WHERE v.kenteken = '" + kentekenVrachtwagen + "'", Vrachtwagen.class );
+        Vrachtwagen vrachtwagenToUpdate = em.find(Vrachtwagen.class, vrachtwagenToFind.getSingleResult().getId());
+        vrachtwagenToUpdate.setLocatieVrachtwagen(em.find(Locatie.class, locatiePK));
+        tx.commit();
+    }
+
+    public void verwijderenVrachtwagenMetScanner(){
         System.out.println("\n" + "Voer het kenteken van de vrachtwagen in");
         String kentekenVrachtwagen = scanner.nextLine();
         System.out.println("Het kenteken is " + kentekenVrachtwagen);
