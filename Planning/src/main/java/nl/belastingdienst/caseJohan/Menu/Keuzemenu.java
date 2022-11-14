@@ -20,7 +20,8 @@ public class Keuzemenu {
         System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Vrachtwagen toevoegen/verwijderen/locatie updaten/chassis aankoppelen" +
                 "\n" + "(2)Chassis toevoegen/verwijderen" + "\n" + "(3)Tank toevoegen/verwijderen" + "\n" +
                 "(4)Lijst APK data weergeven" + "\n" + "(5)Locatie van een chassis weergeven" + "\n" +
-                "(6)Chassis achter vrachtwagen weergeven" + "\n" + "(7)Transportopdracht plannen");
+                "(6)Chassis achter vrachtwagen weergeven" + "\n" + "(7)Transportopdracht plannen" + "\n" +
+                "(8)Afsluiten");
 
         keuze = Integer.parseInt(scanner.nextLine());
 
@@ -74,7 +75,8 @@ public class Keuzemenu {
                 keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
                 keuzeTransportopdracht();
                 break;
-
+            case 8:
+                break;
         }
     }
 
@@ -98,6 +100,8 @@ public class Keuzemenu {
                 vrachtwagenController.chassisAankoppelen();
                 start();
                 break;
+            case 5:
+                start();
         }
     }
 

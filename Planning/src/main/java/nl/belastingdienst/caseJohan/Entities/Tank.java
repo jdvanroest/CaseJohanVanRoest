@@ -7,6 +7,7 @@ public class Tank {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
+
     private String naam;
     private int gewicht;
     private int inhoud; // inhoud in liters
@@ -33,5 +34,11 @@ public class Tank {
         this.locatieTank = locatieTank;
     }
 
+    public Locatie getLocatieTank() {
+        return locatieTank;
+    }
 
+    public String getNaam() {
+        return naam;
+    }
 }

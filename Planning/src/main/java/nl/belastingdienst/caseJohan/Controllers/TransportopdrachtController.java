@@ -1,6 +1,7 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.Entities.*;
+import nl.belastingdienst.caseJohan.Menu.Keuzemenu;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -17,21 +18,24 @@ public class TransportopdrachtController {
 
     public void makenTransportOpdrachtMetScanner(){
         System.out.println("Voer het ID van tank die verplaats moet worden in");
-        int naamTeVerplaatsenTank = Integer.parseInt(scanner.nextLine());
-        System.out.println("Voer de locatiecode van de beginlocatie van de tank in");
-        String PKbeginLocatieTank = scanner.nextLine();
-        System.out.println("Voer de locatiecode van de eindlocatie van de tank in");
-        String PKeindLocatieTank = scanner.nextLine();
+        int idTeVerplaatsenTank = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Voer de locatiecode van de eindlocatie van transportopdracht in");
+        String PkEindLocatieTank = scanner.nextLine();
 
         tx.begin();
-        Tank teVerplaatsenTank = em.find(Tank.class, naamTeVerplaatsenTank);
-        Locatie beginlocatie = em.find(Locatie.class, PKbeginLocatieTank);
-        Locatie eindlocatie = em.find(Locatie.class, PKeindLocatieTank);
-        em.persist(new Transportopdracht(teVerplaatsenTank, beginlocatie, eindlocatie));
+        Tank teVerplaatsenTank = em.find(Tank.class, idTeVerplaatsenTank);
+        Locatie beginlocatie = em.find(Locatie.class, teVerplaatsenTank.getLocatieTank().getLocatiecode());
+        Locatie eindlocatie = em.find(Locatie.class, PkEindLocatieTank);
+        Transportopdracht transportopdracht = new Transportopdracht(teVerplaatsenTank, beginlocatie, eindlocatie);
+        em.persist(transportopdracht);
         tx.commit();
+        System.out.println("Transportopdracht ingevoerd met bijbehorende id nummer" + transportopdracht.getId()
+            + " voor het verplaatsen van tank " + teVerplaatsenTank.getNaam() + " van " + beginlocatie.getNaam()
+            + " naar " + eindlocatie.getNaam() + "\n");
     }
 
-    public void transportopdrachtPlannen(){
+    public void transportopdrachtPlannen() {
         System.out.println("Voer het ID van de te plannen opdracht in");
         int pkTePlannenOpdracht = Integer.parseInt(scanner.nextLine());
         System.out.println("Voer het kenteken van de vrachtwagen die de opdracht uit moet voeren in");
@@ -40,12 +44,18 @@ public class TransportopdrachtController {
         tx.begin();
         Transportopdracht transportopdrachtToUpdate = em.find(Transportopdracht.class, pkTePlannenOpdracht);
         TypedQuery<Vrachtwagen> vrachtwagenToFind = em.createQuery("SELECT v from Vrachtwagen v WHERE " +
-                "v.kenteken = '" + kentekenGeplandeVrachtwagen + "'", Vrachtwagen.class );
+                "v.kenteken = '" + kentekenGeplandeVrachtwagen + "'", Vrachtwagen.class);
         Vrachtwagen geplandeVrachtwagen = em.find(Vrachtwagen.class, vrachtwagenToFind.getSingleResult().getId());
-        transportopdrachtToUpdate.setVrachtwagen(geplandeVrachtwagen);
-        tx.commit();
-        System.out.println("Rit " + pkTePlannenOpdracht + " is gepland met vrachtwagen "
-                + vrachtwagenToFind.getSingleResult().getKenteken() + "\n");
+        if (geplandeVrachtwagen.getChassis() == null) {
+            System.out.println("Let op, vrachtwagen heeft geen chassis bij zich" + "\n");
+            Keuzemenu keuzemenu = new Keuzemenu();
+            keuzemenu.start();
+        } else {
+            transportopdrachtToUpdate.setVrachtwagen(geplandeVrachtwagen);
+            tx.commit();
+            System.out.println("Rit " + pkTePlannenOpdracht + " is gepland met vrachtwagen "
+                    + vrachtwagenToFind.getSingleResult().getKenteken() + "\n");
+        }
     }
 
     public void uitgevoerdeTransportopdrachtVerwerken(){

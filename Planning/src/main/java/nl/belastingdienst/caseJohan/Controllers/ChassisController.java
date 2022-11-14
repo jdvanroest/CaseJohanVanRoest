@@ -28,7 +28,7 @@ public class ChassisController {
         int gewicht = Integer.parseInt(scanner.nextLine());
         System.out.println("Het gewicht is " + gewicht + " kg");
 
-        System.out.println("Voer de lengte van het chassis in. 20ft of 40ft");
+        System.out.println("Voer de lengte van het chassis in. FT20 of FT40");
         String s = scanner.nextLine();
         lengteChassis = LengteChassis.valueOf(s);
         System.out.println("De lengte is " + lengteChassis);
@@ -54,7 +54,7 @@ public class ChassisController {
         System.out.println("Het kenteken is " + kentekenChassis);
         tx.begin();
         TypedQuery chassisToRemove = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
-        em.remove(chassisToRemove);
+        em.remove(chassisToRemove.getSingleResult());
         tx.commit();
     }
 

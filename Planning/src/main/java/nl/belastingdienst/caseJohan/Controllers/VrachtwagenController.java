@@ -52,7 +52,7 @@ public class VrachtwagenController {
         EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum, em.find(Chassis.class, null), em.find(Locatie.class, "parbed"));
+        Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum, null, em.find(Locatie.class, "parbed"));
         em.persist(vrachtwagen);
         tx.commit();
 

@@ -53,4 +53,8 @@ public class Transportopdracht {
     }
 
     public Tank getTank(){return tank;}
+    public int getId() {
+        return id;
+    }
+
 }

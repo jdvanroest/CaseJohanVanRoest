@@ -44,8 +44,8 @@ public class Mockdata {
         em.persist(new Vrachtwagen(Merk.SCANIA, "5-LPV-53",8500, 183507, LocalDate.of(2023,5,15),em.find(Chassis.class, 4), em.find(Locatie.class, "parbed")));
         em.persist(new Vrachtwagen(Merk.SCANIA, "5-LPV-54",8500, 305467, LocalDate.of(2023,10,17),em.find(Chassis.class, 5), em.find(Locatie.class, "parbed")));
             // tankjes invoeren
-        em.persist(new Tank("fotu123456", 3100, 33000, em.find(Locatie.class, "rscrot")));
-        em.persist(new Tank("fotu123457", 3100, 33000, em.find(Locatie.class, "rscrot")));
+        em.persist(new Tank("fotu123456", 3100, 33000, em.find(Locatie.class, "cobroz")));
+        em.persist(new Tank("fotu123457", 3100, 33000, em.find(Locatie.class, "cobroz")));
         em.persist(new Tank("fotu123458", 3100, 33000, em.find(Locatie.class, "rscrot")));
         em.persist(new Tank("fotu123459", 3100, 33000, em.find(Locatie.class, "rscrot")));
         em.persist(new Tank("fotu123460", 3100, 33000, em.find(Locatie.class, "rscrot")));
