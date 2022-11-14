@@ -1,9 +1,6 @@
 package nl.belastingdienst.caseJohan.Menu;
 
-import nl.belastingdienst.caseJohan.Controllers.ChassisController;
-import nl.belastingdienst.caseJohan.Controllers.CreateApkDatumLijst;
-import nl.belastingdienst.caseJohan.Controllers.TankController;
-import nl.belastingdienst.caseJohan.Controllers.VrachtwagenController;
+import nl.belastingdienst.caseJohan.Controllers.*;
 
 import java.util.Scanner;
 
@@ -17,6 +14,7 @@ public class Keuzemenu {
     int keuze = 0;
     int keuzeChassisLocatieWeergeven= 0;
     int keuzeChassisVrachtwagenWeergeven =0;
+    int keuzeTransportopdracht =0;
 
     public void start() {
         System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Vrachtwagen toevoegen/verwijderen/locatie updaten/chassis aankoppelen" +
@@ -70,6 +68,13 @@ public class Keuzemenu {
                 keuzeChassisVrachtwagenWeergeven = Integer.parseInt(scanner.nextLine());
                 keuzeChassisVrachtwagenWeergeven();
                 break;
+            case 7:
+                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Transportopdracht toevoegen"
+                        + "\n" + "(2)Transportopdracht plannen" + "\n" + "(3)Transportopdracht uitvoeren");
+                keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
+                keuzeTransportopdracht();
+                break;
+
         }
     }
 
@@ -79,19 +84,19 @@ public class Keuzemenu {
         switch (keuzeVrachtwagen) {
             case 1:
                 vrachtwagenController.makenVrachtwagenMetScanner();
-                keuzeVrachtwagen();
+                start();
                 break;
             case 2:
                 vrachtwagenController.verwijderenVrachtwagenMetScanner();
-                keuzeVrachtwagen();
+                start();
                 break;
             case 3:
                 vrachtwagenController.vrachtwagenLocatieUpdaten();
-                keuzeVrachtwagen();
+                start();
                 break;
             case 4:
                 vrachtwagenController.chassisAankoppelen();
-                keuzeVrachtwagen();
+                start();
                 break;
         }
     }
@@ -101,11 +106,11 @@ public class Keuzemenu {
         switch (keuzeChassis) {
             case 1:
                 chassisController.makenChassisMetScanner();
-                keuzeChassis();
+                start();
                 break;
             case 2:
                 chassisController.verwijderenChassisMetScanner();
-                keuzeChassis();
+                start();
                 break;
         }
     }
@@ -114,11 +119,11 @@ public class Keuzemenu {
         switch (keuzeTank) {
             case 1:
                 tankController.makenTankMetScanner();
-                keuzeTank();
+                start();
                 break;
             case 2:
                 tankController.verwijderenTankMetScanner();
-                keuzeTank();
+                start();
                 break;
         }
     }
@@ -127,15 +132,15 @@ public class Keuzemenu {
         switch (keuzeApkLijst) {
             case 1:
                 createApkDatumLijst.vrachtwagenApkLijstMaken();
-                keuzeApkLijst();
+                start();
                 break;
             case 2:
                 createApkDatumLijst.chassisApkLijstMaken();
-                keuzeApkLijst();
+                start();
                 break;
             case 3:
                 createApkDatumLijst.VrachtwagenEnChassisAPKLijstMaken();
-                keuzeApkLijst();
+                start();
                 break;
             case 4:
                 start();
@@ -147,7 +152,7 @@ public class Keuzemenu {
         switch (keuzeChassisLocatieWeergeven) {
             case 1:
                 chassisController.locatieChassis();
-                tweedeKeuzeMenu();
+                start();
                 break;
             case 2:
                 start();
@@ -159,8 +164,26 @@ public class Keuzemenu {
         switch (keuzeChassisVrachtwagenWeergeven){
             case 1:
                 vrachtwagenController.aangekoppeldeChassisWeergeven();
-                tweedeKeuzeMenu();
+                start();
+                break;
             case 2:
+                start();
+                break;
+        }
+    }
+    public void keuzeTransportopdracht(){
+        TransportopdrachtController transportopdrachtController = new TransportopdrachtController();
+        switch(keuzeTransportopdracht){
+            case 1:
+                transportopdrachtController.makenTransportOpdrachtMetScanner();
+                start();
+                break;
+            case 2:
+                transportopdrachtController.transportopdrachtPlannen();
+                start();
+                break;
+            case 3:
+                transportopdrachtController.uitgevoerdeTransportopdrachtVerwerken();
                 start();
                 break;
         }

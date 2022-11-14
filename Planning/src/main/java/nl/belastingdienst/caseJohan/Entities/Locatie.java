@@ -17,4 +17,8 @@ public class Locatie {
     public Locatie(){
 
     }
+
+    public String toString(){
+        return naam;
+    }
 }

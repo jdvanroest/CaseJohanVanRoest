@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 public class Chassis {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
    @Column(unique = true)
     private String kenteken;
@@ -45,11 +45,9 @@ public class Chassis {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Locatie getLocatie(){
         return locatie;
     }
+
+    public void setLocatieChassis(Locatie locatieVrachtwagen){this.locatie = locatieVrachtwagen;}
 }

@@ -5,19 +5,21 @@ import javax.persistence.*;
 @Entity
 public class Tank {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String naam;
     private int gewicht;
     private int inhoud; // inhoud in liters
 
+
     @OneToOne
     Locatie locatieTank;
 
-    public Tank(String naam, int gewicht, int inhoud) {
+    public Tank(String naam, int gewicht, int inhoud, Locatie locatieTank) {
         this.naam = naam;
         this.gewicht = gewicht;
         this.inhoud = inhoud;
+        this.locatieTank = locatieTank;
     }
 
     public Tank(){ }
@@ -26,4 +28,10 @@ public class Tank {
     public int getId() {
         return id;
     }
+
+    public void setLocatieTank(Locatie locatieTank) {
+        this.locatieTank = locatieTank;
+    }
+
+
 }

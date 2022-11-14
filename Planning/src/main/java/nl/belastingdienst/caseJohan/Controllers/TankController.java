@@ -1,5 +1,6 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
+import nl.belastingdienst.caseJohan.Entities.Locatie;
 import nl.belastingdienst.caseJohan.Entities.Tank;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,7 @@ public class TankController {
         EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Tank tank = new Tank(naam, gewicht, inhoud);
+        Tank tank = new Tank(naam, gewicht, inhoud, em.find(Locatie.class, "boarot"));
         em.persist(tank);
         tx.commit();
 

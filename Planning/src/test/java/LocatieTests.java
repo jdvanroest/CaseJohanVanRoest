@@ -19,8 +19,10 @@ public class LocatieTests {
 
         //Act
         tx.begin();
-            em.persist(new Locatie("A", "cobelfret rotterdam"));
-            em.persist(new Locatie("B", "rsc rotterdam"));
+            em.persist(new Locatie("cobroz", "cobelfret rotterdam"));
+            em.persist(new Locatie("rscrot", "rsc rotterdam"));
+            em.persist(new Locatie("parbot", "parkeerplaats botlek"));
+            em.persist(new Locatie("parbed", "parkeerplaats bedrijf"));
         tx.commit();
         //assert
         Assertions.assertThat(2).isEqualTo(2);
