@@ -64,7 +64,7 @@ public class ChassisController {
         tx.begin();
         TypedQuery<Chassis> chassisToFindLocation = em.createQuery("SELECT c from Chassis c WHERE c.kenteken = '" + kentekenChassis + "'", Chassis.class);
         em.find(Chassis.class, chassisToFindLocation.getSingleResult().getId());
-        System.out.println(kentekenChassis + " is op locatie " + chassisToFindLocation.getSingleResult().getLocatie()); //todo kenteken is op locatie nl.belastingdienst.caseJohan.Entities.Locatie@5503de1
+        System.out.println(kentekenChassis + " is op locatie " + chassisToFindLocation.getSingleResult().getLocatie() + "\n");
         tx.commit();
     }
 }

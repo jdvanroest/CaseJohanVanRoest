@@ -9,7 +9,7 @@ public class Tank {
     private int id;
 
     private String naam;
-    private int gewicht;
+    private int gewicht; // gewicht in kilogram
     private int inhoud; // inhoud in liters
 
 

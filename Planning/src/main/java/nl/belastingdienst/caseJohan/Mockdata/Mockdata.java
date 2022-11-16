@@ -25,6 +25,7 @@ public class Mockdata {
         em.persist(new Locatie("rscrot", "rsc rotterdam"));
         em.persist(new Locatie("parbot", "parkeerplaats botlek"));
         em.persist(new Locatie("parbed", "parkeerplaats bedrijf"));
+        em.persist(new Locatie("boarot", "boasso rotterdam"));
 
             // chassis invoeren
         em.persist(new Chassis("5-HPD-80", 4700, LengteChassis.FT20, LocalDate.of(2022,12,2), em.find(Locatie.class, "parbed")));

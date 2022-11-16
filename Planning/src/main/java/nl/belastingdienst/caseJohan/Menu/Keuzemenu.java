@@ -41,13 +41,13 @@ public class Keuzemenu {
                 break;
             case 2:
                 System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Chassis toevoegen" + "\n" +
-                        "(2)Chassis verwijderen");
+                        "(2)Chassis verwijderen" + "\n" +  "(3)Terug naar startmenu");
                 keuzeChassis = Integer.parseInt(scanner.nextLine());
                 keuzeChassis();
                 break;
             case 3:
                 System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Tank toevoegen" + "\n" +
-                        "(2)Tank verwijderen");
+                        "(2)Tank verwijderen " + "\n" +  "(3)Terug naar startmenu");
                 keuzeTank = Integer.parseInt(scanner.nextLine());
                 keuzeTank();
                 break;
@@ -71,7 +71,8 @@ public class Keuzemenu {
                 break;
             case 7:
                 System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Transportopdracht toevoegen"
-                        + "\n" + "(2)Transportopdracht plannen" + "\n" + "(3)Transportopdracht uitvoeren");
+                        + "\n" + "(2)Transportopdracht plannen" + "\n" + "(3)Transportopdracht uitvoeren" + "\n"
+                        +  "(4)Terug naar startmenu");
                 keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
                 keuzeTransportopdracht();
                 break;
@@ -116,6 +117,9 @@ public class Keuzemenu {
                 chassisController.verwijderenChassisMetScanner();
                 start();
                 break;
+            case 3:
+                start();
+                break;
         }
     }
     public void keuzeTank(){
@@ -127,6 +131,9 @@ public class Keuzemenu {
                 break;
             case 2:
                 tankController.verwijderenTankMetScanner();
+                start();
+                break;
+            case 3:
                 start();
                 break;
         }
@@ -188,6 +195,9 @@ public class Keuzemenu {
                 break;
             case 3:
                 transportopdrachtController.uitgevoerdeTransportopdrachtVerwerken();
+                start();
+                break;
+            case 4:
                 start();
                 break;
         }

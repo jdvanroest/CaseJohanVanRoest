@@ -22,7 +22,7 @@ public class CreateApkDatumLijst {
         for (Object[] vrachtwagen1 : apkLijst) {
             LocalDate apkDatum = (LocalDate) vrachtwagen1[0];
             String kenteken = (String) vrachtwagen1[1];
-            System.out.println("Kenteken " + kenteken + " heeft apk datum " + apkDatum + ".");
+            System.out.println("Vrachtwagen met kenteken " + kenteken + " heeft apk datum " + apkDatum + ".");
         }
 
 
@@ -91,7 +91,7 @@ public class CreateApkDatumLijst {
         }
         @Override
         public String toString(){
-            return "kenteken " + kenteken + " apkdatum " + apk;
+            return "kenteken " + kenteken + " heeft apkdatum " + apk;
         }
     }
 }
