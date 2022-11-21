@@ -1,12 +1,11 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
-import nl.belastingdienst.caseJohan.Entities.*;
-import nl.belastingdienst.caseJohan.Menu.Keuzemenu;
+import nl.belastingdienst.caseJohan.model.*;
+import nl.belastingdienst.caseJohan.services.CreateEntityManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class TransportopdrachtController {
@@ -48,8 +47,8 @@ public class TransportopdrachtController {
         Vrachtwagen geplandeVrachtwagen = em.find(Vrachtwagen.class, vrachtwagenToFind.getSingleResult().getId());
         if (geplandeVrachtwagen.getChassis() == null) {
             System.out.println("Let op, vrachtwagen heeft geen chassis bij zich" + "\n");
-            Keuzemenu keuzemenu = new Keuzemenu();
-            keuzemenu.start();
+            Hoofdmenu hoofdmenu = new Hoofdmenu();
+            hoofdmenu.start();
         } else {
             transportopdrachtToUpdate.setVrachtwagen(geplandeVrachtwagen);
             tx.commit();

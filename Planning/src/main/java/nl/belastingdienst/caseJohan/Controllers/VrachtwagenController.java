@@ -1,9 +1,10 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
-import nl.belastingdienst.caseJohan.Entities.Chassis;
-import nl.belastingdienst.caseJohan.Entities.Locatie;
-import nl.belastingdienst.caseJohan.Entities.Vrachtwagen;
-import nl.belastingdienst.caseJohan.enums.Merk;
+import nl.belastingdienst.caseJohan.model.Chassis;
+import nl.belastingdienst.caseJohan.model.Locatie;
+import nl.belastingdienst.caseJohan.model.Vrachtwagen;
+import nl.belastingdienst.caseJohan.model.enums.Merk;
+import nl.belastingdienst.caseJohan.services.CreateEntityManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -14,14 +15,16 @@ import java.util.Scanner;
 
 public class VrachtwagenController {
     Scanner scanner = new Scanner(System.in);
+    ScannerInputValidation scannerInputValidation = new ScannerInputValidation();
     CreateEntityManager createEntityManager = new CreateEntityManager();
     EntityManager em = createEntityManager.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 
+
+
     public Vrachtwagen makenVrachtwagenMetScanner() {
         Merk m = Merk.NOTDEFINEDYET;
         int gewicht =0;
-        int kilometerstand =0;
         LocalDate apkdatum = LocalDate.parse("01.01.2023", DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         System.out.println("Voer het merk van de vrachtwagen in. Kies uit SCANIA , DAF, MAN, MERCEDES, VOLVO, RENAULT");
         for (int i = 1; i <= 2; i += 1) {
@@ -40,27 +43,23 @@ public class VrachtwagenController {
         String kenteken = scanner.nextLine();
         System.out.println("Het kenteken is " + kenteken);
 
-        do{
-            System.out.println("\n" +"Voer het lediggewicht in kg van de vrachtwagen in");
+        while(gewicht<5000 || gewicht>16000) {
+            System.out.println("\n" + "Voer het lediggewicht in kg van de vrachtwagen in");
             try {
                 gewicht = Integer.parseInt(scanner.nextLine());
                 System.out.println("Het ingevoerde gewicht is " + gewicht + " kg");
-                if(gewicht<5000 || gewicht>16000){
-                    System.out.println("Geen geldige invoer");}
-            }catch(Exception e) {
+                if (gewicht < 5000 || gewicht > 16000) {
+                    System.out.println("Geen geldige invoer");
+                }
+            } catch (Exception e) {
                 System.out.println("Geen geldige invoer.");
             }
-        } while(gewicht<5000 || gewicht>16000);
+        }
 
-        do {
-            System.out.println("\n" + "Voer de kilometerstand van de vrachtwagen in");
-            try {
-                kilometerstand = Integer.parseInt(scanner.nextLine());
-                System.out.println("De ingevoerde kilometerstand is " + kilometerstand);
-            }catch(Exception e){
-                System.out.println("geen geldige invoer");
-            }
-        }while(kilometerstand<0);
+
+        System.out.println("\n" + "Voer de kilometerstand van de vrachtwagen in");
+        int kilometerstand = scannerInputValidation.kilometerstandInputValidation(0, 2147483647);
+        System.out.println("De ingevoerde kilometerstand is " + kilometerstand);
 
 
         System.out.println("\n" +"Voer de apkdatum [dd.mm.yyyy] van de vrachtwagen in");
@@ -87,7 +86,8 @@ public class VrachtwagenController {
 
     public void aangekoppeldeChassisWeergeven(){
         System.out.println("Voer het kenteken van de vrachtwagen waarvan je het chassis wilt weten in");
-        String kentekenVrachtwagen = scanner.nextLine();
+        // String kentekenVrachtwagen = scanner.nextLine();
+        String kentekenVrachtwagen = scannerInputValidation.scannerValidation();
         tx.begin();
         String kentekenChassisAchterVrachtwagen = em.createQuery("SELECT v from Vrachtwagen v WHERE " +
                 "v.kenteken = '" + kentekenVrachtwagen + "'", Vrachtwagen.class).getSingleResult().getChassis().getKenteken();

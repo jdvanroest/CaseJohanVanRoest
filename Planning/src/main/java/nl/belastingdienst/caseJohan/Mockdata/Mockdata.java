@@ -1,9 +1,9 @@
 package nl.belastingdienst.caseJohan.Mockdata;
 
-import nl.belastingdienst.caseJohan.Controllers.CreateEntityManager;
-import nl.belastingdienst.caseJohan.Entities.*;
-import nl.belastingdienst.caseJohan.enums.LengteChassis;
-import nl.belastingdienst.caseJohan.enums.Merk;
+import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.model.*;
+import nl.belastingdienst.caseJohan.model.enums.LengteChassis;
+import nl.belastingdienst.caseJohan.model.enums.Merk;
 
 import javax.persistence.EntityManager;
 

@@ -14,14 +14,15 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <latest.jdbc.postgres.driver>42.2.24</latest.jdbc.postgres.driver>
         <latest.junit.version>5.8.2</latest.junit.version>
         <latest.assertj-core>3.22.0</latest.assertj-core>
         <latest.hibernate.version>5.6.12.Final</latest.hibernate.version>
         <latest.log4j.version>2.19.0</latest.log4j.version>
+        <latest.weld.version>3.1.9.Final</latest.weld.version>
     </properties>
 
     <dependencyManagement>
@@ -57,6 +58,11 @@
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>${latest.log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.weld.se</groupId>
+                <artifactId>weld-se-shaded</artifactId>
+                <version>${latest.weld.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

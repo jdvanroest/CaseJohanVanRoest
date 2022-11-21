@@ -1,8 +1,9 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
-import nl.belastingdienst.caseJohan.Entities.Chassis;
-import nl.belastingdienst.caseJohan.Entities.Locatie;
-import nl.belastingdienst.caseJohan.enums.LengteChassis;
+import nl.belastingdienst.caseJohan.model.Chassis;
+import nl.belastingdienst.caseJohan.model.Locatie;
+import nl.belastingdienst.caseJohan.model.enums.LengteChassis;
+import nl.belastingdienst.caseJohan.services.CreateEntityManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
