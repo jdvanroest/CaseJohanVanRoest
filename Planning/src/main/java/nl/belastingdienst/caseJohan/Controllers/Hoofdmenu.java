@@ -1,10 +1,7 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
 
-import nl.belastingdienst.caseJohan.view.ChassisView;
-import nl.belastingdienst.caseJohan.view.HoofdmenuView;
-import nl.belastingdienst.caseJohan.view.TankView;
-import nl.belastingdienst.caseJohan.view.VrachtwagenView;
+import nl.belastingdienst.caseJohan.view.*;
 
 import javax.inject.Inject;
 import java.util.Scanner;
@@ -18,67 +15,57 @@ public class Hoofdmenu {
     VrachtwagenController vrachtwagenController;
     @Inject
     ChassisView chassisView;
-    TankView tankView = new TankView();
-
-    Scanner scanner = new Scanner(System.in);
-    int keuzeApkLijst = 0;
-    int keuzeTank = 0;
-    int keuzeChassis = 0;
-    int keuzeVrachtwagen = 0;
-    int keuze = 0;
-    int keuzeChassisLocatieWeergeven= 0;
-    int keuzeChassisVrachtwagenWeergeven =0;
-    int keuzeTransportopdracht =0;
+    @Inject
+    TankView tankView;
+    @Inject
+    APKView apkView;
+    @Inject
+    TransportopdrachtView transportopdrachtView;
+    @Inject
+    Scanner scanner;
 
     public void start() {
        hoofdmenuView.showHoofdmenuOptions();
-       keuze = Integer.parseInt(scanner.nextLine());
-       tweedeKeuzeMenu();
+       int keuze = Integer.parseInt(scanner.nextLine());
+       tweedeKeuzeMenu(keuze);
     }
 
 
-    public void tweedeKeuzeMenu() {
-
+    public void tweedeKeuzeMenu(int keuze) {
         switch (keuze) {
             case 1:
-                vrachtwagenView.showVrachtwagenMenuOptions();
-                keuzeVrachtwagen = Integer.parseInt(scanner.nextLine());
-                keuzeVrachtwagen();
+                vrachtwagenView.showVrachtwagenMenu();
+                int keuzeVrachtwagen = Integer.parseInt(scanner.nextLine());
+                keuzeVrachtwagen(keuzeVrachtwagen);
                 break;
             case 2:
-                chassisView.showChassisMenuOptions();
-                keuzeChassis = Integer.parseInt(scanner.nextLine());
-                keuzeChassis();
+                chassisView.showChassisMenu();
+                int keuzeChassis = Integer.parseInt(scanner.nextLine());
+                keuzeChassis(keuzeChassis);
                 break;
             case 3:
-                tankView.showTankMenuOptions();
-                keuzeTank = Integer.parseInt(scanner.nextLine());
-                keuzeTank();
+                tankView.showTankMenu();
+                int keuzeTank = Integer.parseInt(scanner.nextLine());
+                keuzeTank(keuzeTank);
                 break;
             case 4:
-                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)APK lijst voor vrachtwagens"
-                        + "\n" + "(2)APK lijst voor chassis" + "\n" + "(3)APK lijst vrachtwagens en chassis");
-                keuzeApkLijst = Integer.parseInt(scanner.nextLine());
-                keuzeApkLijst();
+                apkView.showAPKMenu();
+                int keuzeApkLijst = Integer.parseInt(scanner.nextLine());
+                keuzeApkLijst(keuzeApkLijst);
                 break;
             case 5:
-                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Locatie chassis weergeven"
-                        + "\n" +  "(2)Terug naar startmenu");
-                keuzeChassisLocatieWeergeven = Integer.parseInt(scanner.nextLine());
-                keuzeChassisLocatieWeergeven();
+                chassisView.showChassisLocationMenu();
+                int keuzeChassisLocatieWeergeven = Integer.parseInt(scanner.nextLine());
+                keuzeChassisLocatieWeergeven(keuzeChassisLocatieWeergeven);
                 break;
             case 6:
-                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Chassis achter vrachtwagen weergeven"
-                        + "\n" +  "(2)Terug naar startmenu");
-                keuzeChassisVrachtwagenWeergeven = Integer.parseInt(scanner.nextLine());
-                keuzeChassisVrachtwagenWeergeven();
+                int keuzeChassisVrachtwagenWeergeven = Integer.parseInt(scanner.nextLine());
+                keuzeChassisVrachtwagenWeergeven(keuzeChassisVrachtwagenWeergeven);
                 break;
             case 7:
-                System.out.println("Maak een keuze uit de volgende opties:" + "\n" + "(1)Transportopdracht toevoegen"
-                        + "\n" + "(2)Transportopdracht plannen" + "\n" + "(3)Transportopdracht uitvoeren" + "\n"
-                        +  "(4)Terug naar startmenu");
-                keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
-                keuzeTransportopdracht();
+                transportopdrachtView.showTransportopdrachtMenu();
+                int keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
+                keuzeTransportopdracht(keuzeTransportopdracht);
                 break;
             case 8:
                 break;
@@ -86,7 +73,7 @@ public class Hoofdmenu {
     }
 
 
-    public void keuzeVrachtwagen() {
+    public void keuzeVrachtwagen(int keuzeVrachtwagen) {
 
         switch (keuzeVrachtwagen) {
             case 1:
@@ -110,7 +97,7 @@ public class Hoofdmenu {
         }
     }
 
-    public void keuzeChassis(){
+    public void keuzeChassis(int keuzeChassis){
         ChassisController chassisController = new ChassisController();
         switch (keuzeChassis) {
             case 1:
@@ -126,7 +113,7 @@ public class Hoofdmenu {
                 break;
         }
     }
-    public void keuzeTank(){
+    public void keuzeTank(int keuzeTank){
         TankController tankController = new TankController();
         switch (keuzeTank) {
             case 1:
@@ -142,7 +129,7 @@ public class Hoofdmenu {
                 break;
         }
     }
-    public void keuzeApkLijst() {
+    public void keuzeApkLijst(int keuzeApkLijst) {
         CreateApkDatumLijst createApkDatumLijst = new CreateApkDatumLijst();
         switch (keuzeApkLijst) {
             case 1:
@@ -162,7 +149,7 @@ public class Hoofdmenu {
                 break;
             }
         }
-    public void keuzeChassisLocatieWeergeven() {
+    public void keuzeChassisLocatieWeergeven(int keuzeChassisLocatieWeergeven) {
         ChassisController chassisController = new ChassisController();
         switch (keuzeChassisLocatieWeergeven) {
             case 1:
@@ -174,7 +161,7 @@ public class Hoofdmenu {
                 break;
             }
         }
-     public void keuzeChassisVrachtwagenWeergeven(){
+     public void keuzeChassisVrachtwagenWeergeven(int keuzeChassisVrachtwagenWeergeven){
         VrachtwagenController vrachtwagenController = new VrachtwagenController();
         switch (keuzeChassisVrachtwagenWeergeven){
             case 1:
@@ -186,7 +173,7 @@ public class Hoofdmenu {
                 break;
         }
     }
-    public void keuzeTransportopdracht(){
+    public void keuzeTransportopdracht(int keuzeTransportopdracht){
         TransportopdrachtController transportopdrachtController = new TransportopdrachtController();
         switch(keuzeTransportopdracht){
             case 1:

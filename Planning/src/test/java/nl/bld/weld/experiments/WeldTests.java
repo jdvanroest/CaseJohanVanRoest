@@ -21,8 +21,5 @@ public class WeldTests {
         hoofdmenu.start();
 
         cdiContainer.shutdown();
-
-
-
      }
 }

@@ -1,9 +1,11 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
+import javax.inject.Inject;
 import java.util.Scanner;
 
 public class ScannerInputValidation {
-    Scanner scanner = new Scanner(System.in);
+    @Inject
+    Scanner scanner;
 
 
     public String scannerValidation(){
