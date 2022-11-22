@@ -3,8 +3,9 @@ package nl.belastingdienst.caseJohan.Controllers;
 import nl.belastingdienst.caseJohan.model.Chassis;
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.enums.LengteChassis;
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -14,8 +15,9 @@ import java.util.Scanner;
 
 public class ChassisController {
 
-    Scanner scanner = new Scanner(System.in);
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    @Inject
+    Scanner scanner;
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     EntityManager em = createEntityManager.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 

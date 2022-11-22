@@ -1,6 +1,6 @@
 package nl.belastingdienst.caseJohan.Mockdata;
 
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 import nl.belastingdienst.caseJohan.model.*;
 import nl.belastingdienst.caseJohan.model.enums.LengteChassis;
 import nl.belastingdienst.caseJohan.model.enums.Merk;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 public class Mockdata {
 
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     public void mockdataInvoeren() {
 
 

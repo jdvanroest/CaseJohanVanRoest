@@ -1,6 +1,6 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreateApkDatumLijst {
 
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     EntityManager em = createEntityManager.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 

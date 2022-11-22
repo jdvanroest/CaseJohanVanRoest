@@ -82,7 +82,7 @@ public class VrachtwagenTests {
          ScannerInputValidation scannerInputValidation = new ScannerInputValidation();
         int kilometerstand = 0;
         System.out.println("\n" + "Voer de kilometerstand van de vrachtwagen in");
-         kilometerstand = scannerInputValidation.kilometerstandInputValidation(0, 2147483647);
+         kilometerstand = scannerInputValidation.intInputValidation(0, 2147483647, "");
          System.out.println("De ingevoerde kilometerstand is " + kilometerstand);
      }
 }

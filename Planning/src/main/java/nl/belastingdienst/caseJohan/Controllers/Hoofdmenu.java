@@ -22,6 +22,10 @@ public class Hoofdmenu {
     @Inject
     TransportopdrachtView transportopdrachtView;
     @Inject
+    TransportopdrachtController transportopdrachtController;
+    @Inject
+    ScannerInputValidation scannerInputValidation;
+    @Inject
     Scanner scanner;
 
     public void start() {
@@ -35,18 +39,15 @@ public class Hoofdmenu {
         switch (keuze) {
             case 1:
                 vrachtwagenView.showVrachtwagenMenu();
-                int keuzeVrachtwagen = Integer.parseInt(scanner.nextLine());
-                keuzeVrachtwagen(keuzeVrachtwagen);
+                keuzeVrachtwagen(scannerInputValidation.intInputValidation(1,5,"Verkeerde invoer. Voer de gewenste keuze tussen 1 en 5 in"));
                 break;
             case 2:
                 chassisView.showChassisMenu();
-                int keuzeChassis = Integer.parseInt(scanner.nextLine());
-                keuzeChassis(keuzeChassis);
+                keuzeChassis(scannerInputValidation.intInputValidation(1,3,"Verkeerde invoer. Voer de gewenste keuze tussen 1 en 3 in"));
                 break;
             case 3:
                 tankView.showTankMenu();
-                int keuzeTank = Integer.parseInt(scanner.nextLine());
-                keuzeTank(keuzeTank);
+                keuzeTank(scannerInputValidation.intInputValidation(1,3, "Verkeerde invoer. Voer de gewenste keuze tussen 1 en 3 in"));
                 break;
             case 4:
                 apkView.showAPKMenu();
@@ -59,13 +60,14 @@ public class Hoofdmenu {
                 keuzeChassisLocatieWeergeven(keuzeChassisLocatieWeergeven);
                 break;
             case 6:
+                vrachtwagenView.chassisAchterVrachtwagenMenuOptions();
                 int keuzeChassisVrachtwagenWeergeven = Integer.parseInt(scanner.nextLine());
                 keuzeChassisVrachtwagenWeergeven(keuzeChassisVrachtwagenWeergeven);
                 break;
             case 7:
                 transportopdrachtView.showTransportopdrachtMenu();
                 int keuzeTransportopdracht = Integer.parseInt(scanner.nextLine());
-                keuzeTransportopdracht(keuzeTransportopdracht);
+                transportopdrachtController.keuzeTransportopdracht(keuzeTransportopdracht);
                 break;
             case 8:
                 break;
@@ -74,7 +76,6 @@ public class Hoofdmenu {
 
 
     public void keuzeVrachtwagen(int keuzeVrachtwagen) {
-
         switch (keuzeVrachtwagen) {
             case 1:
                 vrachtwagenController.makenVrachtwagenMetScanner();
@@ -173,24 +174,5 @@ public class Hoofdmenu {
                 break;
         }
     }
-    public void keuzeTransportopdracht(int keuzeTransportopdracht){
-        TransportopdrachtController transportopdrachtController = new TransportopdrachtController();
-        switch(keuzeTransportopdracht){
-            case 1:
-                transportopdrachtController.makenTransportOpdrachtMetScanner();
-                start();
-                break;
-            case 2:
-                transportopdrachtController.transportopdrachtPlannen();
-                start();
-                break;
-            case 3:
-                transportopdrachtController.uitgevoerdeTransportopdrachtVerwerken();
-                start();
-                break;
-            case 4:
-                start();
-                break;
-        }
-    }
+
 }

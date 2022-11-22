@@ -1,6 +1,6 @@
 package nl.bld.tests;
 
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 import nl.belastingdienst.caseJohan.model.Chassis;
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Vrachtwagen;
@@ -28,7 +28,7 @@ public class oneToOneTests {
         Vrachtwagen vrachtwagen = new Vrachtwagen(Merk.SCANIA, "5-HPD-49", 13500, 134750, LocalDate.of(2011, 1, 2), em.find(Chassis.class, 1), em.find(Locatie.class, "parbot"));
         Chassis chassis = new Chassis("5-HPD-80", 5600, LengteChassis.FT20, LocalDate.of(2011, 1, 2), new Locatie("A", "cobelfret rotterdam"));
         //act
-        CreateEntityManager createEntityManager = new CreateEntityManager();
+        EntityManagerProducer createEntityManager = new EntityManagerProducer();
         EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 

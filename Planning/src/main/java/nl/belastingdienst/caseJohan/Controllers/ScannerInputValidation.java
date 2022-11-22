@@ -22,17 +22,16 @@ public class ScannerInputValidation {
         return s;
     }
 
-    public int kilometerstandInputValidation(int min, int max){
+    public int intInputValidation(int min, int max, String message){
         int i = 0;
-        while(i>=min || i <= max){
+        do{
             try{
                 i = Integer.parseInt(scanner.nextLine());
-                break;
 
             }catch (Exception e){
-                System.out.println("Verkeerde invoer. Voer de kilometerstand van de vrachtwagen in");
+                System.out.println(message);
             }
-        }
+        }while(i<=min || i >= max);
         return i;
     }
 }

@@ -4,8 +4,9 @@ import nl.belastingdienst.caseJohan.model.Chassis;
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Vrachtwagen;
 import nl.belastingdienst.caseJohan.model.enums.Merk;
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -14,11 +15,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class VrachtwagenController {
-    Scanner scanner = new Scanner(System.in);
+    @Inject
+    Scanner scanner;
     ScannerInputValidation scannerInputValidation = new ScannerInputValidation();
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     EntityManager em = createEntityManager.getEntityManager();
     EntityTransaction tx = em.getTransaction();
+
 
 
 
@@ -58,7 +61,7 @@ public class VrachtwagenController {
 
 
         System.out.println("\n" + "Voer de kilometerstand van de vrachtwagen in");
-        int kilometerstand = scannerInputValidation.kilometerstandInputValidation(0, 2147483647);
+        int kilometerstand = scannerInputValidation.intInputValidation(0, 2147483647, "Verkeerde invoer. Voer de kilometerstand van de vrachtwagen in");
         System.out.println("De ingevoerde kilometerstand is " + kilometerstand);
 
 

@@ -1,8 +1,9 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.model.*;
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -10,11 +11,34 @@ import java.util.Scanner;
 
 public class TransportopdrachtController {
 
-    Scanner scanner = new Scanner(System.in);
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    Hoofdmenu hoofdmenu = new Hoofdmenu();
+    @Inject
+    Scanner scanner;
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     EntityManager em = createEntityManager.getEntityManager();
     EntityTransaction tx = em.getTransaction();
 
+
+
+    public void keuzeTransportopdracht(int keuzeTransportopdracht){
+        switch(keuzeTransportopdracht){
+            case 1:
+                makenTransportOpdrachtMetScanner();
+                hoofdmenu.start();
+                break;
+            case 2:
+                transportopdrachtPlannen();
+                hoofdmenu.start();
+                break;
+            case 3:
+                uitgevoerdeTransportopdrachtVerwerken();
+                hoofdmenu.start();
+                break;
+            case 4:
+                hoofdmenu.start();
+                break;
+        }
+    }
     public void makenTransportOpdrachtMetScanner(){
         System.out.println("Voer het ID van tank die verplaats moet worden in");
         int idTeVerplaatsenTank = Integer.parseInt(scanner.nextLine());

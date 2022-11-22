@@ -2,7 +2,7 @@ package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Tank;
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class TankController {
 
     Scanner scanner = new Scanner(System.in);
-    CreateEntityManager createEntityManager = new CreateEntityManager();
+    EntityManagerProducer createEntityManager = new EntityManagerProducer();
 
     public Tank makenTankMetScanner() {
         System.out.println("\n" + "Voer de naam van de tank in");

@@ -1,7 +1,7 @@
 package nl.bld.tests;
 
 import nl.belastingdienst.caseJohan.Controllers.CreateApkDatumLijst;
-import nl.belastingdienst.caseJohan.services.CreateEntityManager;
+import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ public class apkLijstTests {
         //arrange
         CreateApkDatumLijst createApkDatumLijst = new CreateApkDatumLijst();
         //act
-        CreateEntityManager createEntityManager = new CreateEntityManager();
+        EntityManagerProducer createEntityManager = new EntityManagerProducer();
         EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
 
