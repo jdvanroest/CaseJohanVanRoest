@@ -1,23 +1,21 @@
 package nl.belastingdienst.caseJohan.Mockdata;
 
-import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 import nl.belastingdienst.caseJohan.model.*;
 import nl.belastingdienst.caseJohan.model.enums.LengteChassis;
 import nl.belastingdienst.caseJohan.model.enums.Merk;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 
 public class Mockdata {
+    @Inject
+    EntityManager em;
 
-    EntityManagerProducer createEntityManager = new EntityManagerProducer();
     public void mockdataInvoeren() {
 
-
-
-        EntityManager em = createEntityManager.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
             // Locatie invoeren

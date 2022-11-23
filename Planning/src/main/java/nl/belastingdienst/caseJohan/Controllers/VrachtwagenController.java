@@ -4,22 +4,27 @@ import nl.belastingdienst.caseJohan.model.Chassis;
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Vrachtwagen;
 import nl.belastingdienst.caseJohan.model.enums.Merk;
-import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+
 
 public class VrachtwagenController {
     @Inject
     Scanner scanner;
     ScannerInputValidation scannerInputValidation = new ScannerInputValidation();
-    EntityManagerProducer createEntityManager = new EntityManagerProducer();
-    EntityManager em = createEntityManager.getEntityManager();
+
+    @Inject
+    EntityManager em;
+
     EntityTransaction tx = em.getTransaction();
 
 
@@ -77,8 +82,6 @@ public class VrachtwagenController {
                 i-=1;
             }}
 
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         tx.begin();
         Vrachtwagen vrachtwagen = new Vrachtwagen(m, kenteken, gewicht, kilometerstand, apkdatum, null, em.find(Locatie.class, "parbed"));
         em.persist(vrachtwagen);

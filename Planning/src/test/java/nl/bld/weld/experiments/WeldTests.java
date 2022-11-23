@@ -1,6 +1,7 @@
 package nl.bld.weld.experiments;
 
 import nl.belastingdienst.caseJohan.Controllers.Hoofdmenu;
+import org.assertj.core.api.Assertions;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.jboss.weld.inject.WeldInstance;
@@ -22,4 +23,15 @@ public class WeldTests {
 
         cdiContainer.shutdown();
      }
+
+     @Test
+     @DisplayName("check of er max 1 entitymanagerfactory is")
+     void testEenEntityManagerFactory(){
+         //arrange
+
+         //act
+
+         //assert
+         Assertions.assertThat(1).isEqualTo(1);
+      }
 }

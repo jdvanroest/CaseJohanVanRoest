@@ -1,11 +1,11 @@
 package nl.bld.tests;
 
 import nl.belastingdienst.caseJohan.Controllers.CreateApkDatumLijst;
-import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class apkLijstTests {
+    @Inject
+    EntityManager em;
 
     @Test
     @DisplayName("Lijst APK datums vrachtwagens")
@@ -43,8 +45,7 @@ public class apkLijstTests {
         //arrange
         CreateApkDatumLijst createApkDatumLijst = new CreateApkDatumLijst();
         //act
-        EntityManagerProducer createEntityManager = new EntityManagerProducer();
-        EntityManager em = createEntityManager.getEntityManager();
+
         EntityTransaction tx = em.getTransaction();
 
         tx.begin();

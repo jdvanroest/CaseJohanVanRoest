@@ -2,17 +2,20 @@ package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Tank;
-import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.Scanner;
 
 public class TankController {
+    @Inject
+    Scanner scanner;
+    @Inject
+    EntityManager em;
+    EntityTransaction tx = em.getTransaction();
 
-    Scanner scanner = new Scanner(System.in);
-    EntityManagerProducer createEntityManager = new EntityManagerProducer();
 
     public Tank makenTankMetScanner() {
         System.out.println("\n" + "Voer de naam van de tank in");
@@ -25,8 +28,6 @@ public class TankController {
         int inhoud = Integer.parseInt(scanner.nextLine());
         System.out.println("De inhoud in liters is " + inhoud);
 
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
         tx.begin();
         Tank tank = new Tank(naam, gewicht, inhoud, em.find(Locatie.class, "boarot"));
         em.persist(tank);
@@ -36,8 +37,6 @@ public class TankController {
     }
 
     public void verwijderenTankMetScanner(){
-        EntityManager em = createEntityManager.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
 
         System.out.println("\n" + "Voer de naam van de tank in");
         String tanknaam = scanner.nextLine();

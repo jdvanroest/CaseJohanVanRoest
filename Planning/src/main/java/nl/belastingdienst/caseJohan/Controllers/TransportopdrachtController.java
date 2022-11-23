@@ -1,7 +1,6 @@
 package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.model.*;
-import nl.belastingdienst.caseJohan.services.EntityManagerProducer;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -14,8 +13,8 @@ public class TransportopdrachtController {
     Hoofdmenu hoofdmenu = new Hoofdmenu();
     @Inject
     Scanner scanner;
-    EntityManagerProducer createEntityManager = new EntityManagerProducer();
-    EntityManager em = createEntityManager.getEntityManager();
+    @Inject
+    EntityManager em;
     EntityTransaction tx = em.getTransaction();
 
 
