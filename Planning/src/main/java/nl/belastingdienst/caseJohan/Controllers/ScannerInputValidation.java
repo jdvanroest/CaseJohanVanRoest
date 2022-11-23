@@ -31,7 +31,7 @@ public class ScannerInputValidation {
             }catch (Exception e){
                 System.out.println(message);
             }
-        }while(i<=min || i >= max);
+        }while(i<min || i > max);
         return i;
     }
 }

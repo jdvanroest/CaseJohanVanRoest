@@ -163,7 +163,6 @@ public class Hoofdmenu {
             }
         }
      public void keuzeChassisVrachtwagenWeergeven(int keuzeChassisVrachtwagenWeergeven){
-        VrachtwagenController vrachtwagenController = new VrachtwagenController();
         switch (keuzeChassisVrachtwagenWeergeven){
             case 1:
                 vrachtwagenController.aangekoppeldeChassisWeergeven();

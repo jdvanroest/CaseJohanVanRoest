@@ -2,12 +2,14 @@ package nl.belastingdienst.caseJohan.Controllers;
 
 import nl.belastingdienst.caseJohan.model.*;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.Scanner;
 
+@RequestScoped
 public class TransportopdrachtController {
 
     Hoofdmenu hoofdmenu = new Hoofdmenu();

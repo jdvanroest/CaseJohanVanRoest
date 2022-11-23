@@ -15,8 +15,7 @@ public class Main {
         Weld weld = new Weld();
         WeldContainer cdiContainer = weld.initialize();
 
-        WeldInstance<Hoofdmenu> proxy = cdiContainer.select(Hoofdmenu.class);
-        Hoofdmenu hoofdmenu = proxy.get();
+        Hoofdmenu hoofdmenu = cdiContainer.select(Hoofdmenu.class).get();
 
         hoofdmenu.start();
 

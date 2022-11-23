@@ -5,5 +5,5 @@ import javax.inject.Inject;
 public class VrachtwagenDaoService {
 
     @Inject
-    EntityManagerProduces createEntityManager;
+    EntityManagerProducer createEntityManager;
 }
