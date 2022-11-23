@@ -5,17 +5,13 @@ import nl.belastingdienst.caseJohan.model.Locatie;
 import nl.belastingdienst.caseJohan.model.Vrachtwagen;
 import nl.belastingdienst.caseJohan.model.enums.Merk;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-@ApplicationScoped
-@Transactional
 public class VrachtwagenController {
     @Inject
     Scanner scanner;
@@ -23,11 +19,6 @@ public class VrachtwagenController {
 
     @Inject
     EntityManager em;
-
-//    EntityTransaction tx = em.getTransaction();
-
-
-
 
     public Vrachtwagen makenVrachtwagenMetScanner() {
         Merk m = Merk.NOTDEFINEDYET;

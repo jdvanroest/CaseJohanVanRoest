@@ -1,5 +1,6 @@
 package nl.belastingdienst.caseJohan.services;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -11,7 +12,6 @@ public class EntityManagerProducer {
     transient EntityManagerFactory emf;
 
     @Produces
-    @TransactionScoped
     public EntityManager create() {
         return emf.createEntityManager();
     }
